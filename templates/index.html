@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title> Hotel Booking Prediction</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <!--<link rel="stylesheet" type="text/css" href="style.css">-->   
+
+       
+
+    </head>
+
+<body>
+    
+    <header>  
+        <div class=" w-50 m-auto">
+            <div class="py-5">
+                <h2>Predictive analysis</h2>
+            </div>
+            <div>
+                <form action="{{ url_for('predict')}}" method="post">
+                    <div class="form-group">
+                        <label><h4>Lead Time</h4></label>                 
+                        <input type="text" class="form-control" id="lead_time" placeholder="Lead Time" name="lead_time" required>    
+                    </div>
+                    <div class="form-group">
+                        <label><h4>Date Of Booking </h4></label>
+                        <input type="text" class="form-control" id="arrival_date_year" placeholder="Year(YYYY)" name="arrival_date_year" required>
+                        <input type="text" class="form-control" id="arrival_date_month" placeholder="Month(MM)" name="arrival_date_month" required>
+                        <input type="text" class="form-control" id="arrival_date_day_of_month" placeholder="Date(DD)" name="arrival_date_day_of_month" required>
+
+                    </div>
+                    <div class="form-group">
+                        <label><h4>Number of Weekend Nights</h4></label>
+                        <input type="text" class="form-control" id="stays_in_weekend_nights" placeholder="Stay In Weekend Nights" name="stays_in_weekend_nights" required>
+                        <label><h4>Number of Stay In Week Nights</h4></label>
+                        <input type="text" class="form-control" id="stays_in_week_nights" placeholder="Stays In Week Nights" name="stays_in_week_nights" required>
+                        
+                    </div>
+                    <div class="form-group">
+                        <label><h4>Adults</h4></label>
+                        <input type="text" class="form-control" id="adults" placeholder="Adults " name="adults" required>
+
+                        <label><h4>Children</h4></label>
+                        <input type="text" class="form-control" id="children" placeholder="Children " name="children" required>
+
+                        <label><h4>Babies</h4></label>
+                        <input type="text" class="form-control" id="babies" placeholder="Babies " name="babies" required>
+
+                    </div>
+                    <div class="form-group">
+                        <label><h4>Repeated Guest</h4></label>                 
+                        <input type="text" class="form-control" id="is_repeated_guest" placeholder="Repeated Guest" name="is_repeated_guest" required>    
+                    </div>
+                    <div class="form-group">
+                        <label><h4>Previous Cancellations</h4></label>                 
+                        <input type="text" class="form-control" id="previous_cancellations" placeholder="Previous Cancellations" name="previous_cancellations" required>    
+                        <label><h4>Previous Booking not Cancelled</h4></label>                 
+                        <input type="text" class="form-control" id="previous_bookings_not_canceled" placeholder="Previous Booking Not Cancelled" name="previous_bookings_not_canceled" required>                     
+                        <label><h4>Car Parking Space required</h4></label>                 
+                        <input type="text" class="form-control" id="required_car_parking_spaces" placeholder="Car Parking Space Required" name="required_car_parking_spaces" required>    
+                  
+                    
+                    </div>
+                    <div class="form-group">
+                        <label><h4>Special Request Count</h4></label>                 
+                        <input type="text" class="form-control" id="total_of_special_requests" placeholder="Special Request count" name="total_of_special_requests" required>    
+                        <label><h4>Booking Charges</h4></label>                 
+                        <input type="text" class="form-control" id="booking_changes" placeholder="Booking Charges" name="booking_changes" required>    
+                        <label><h4>Days of Waiting</h4></label>                 
+                        <input type="text" class="form-control" id="days_in_waiting_list" placeholder="Days of Waiting" name="days_in_waiting_list" required>    
+                        <label><h4>Average Daily Rate</h4></label>                 
+                        <input type="text" class="form-control" id="adr" placeholder="Average Daily Rate" name="adr" required>    
+                  
+                    </div>
+                    <div class="form-group">
+                        <h4>Hotel Type?</h4><select class="form-control" name="hotel_Resort" id="hotel_Resort" required="required">
+                            <option value="hotel_Resort">Resort Hotel</option>
+                            <option value="hotel_City">City Hotel</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+                        <h4>Meal?</h4><select class="form-control" name="meal_FB" id="meal_FB" required="required">
+                            <option value="meal_FB"> Full Board</option>
+                            <option value="meal_HB"> Half Board</option>
+                            <option value="meal_SC">Self Catering</option>
+                            <option value="meal_Undefined">UnIdentified</option>
+                            <option value="meal_BB">Bed and Breakfast</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+                        <h4>Market Segment?</h4><select class="form-control" name="market_segment_Complementary" id="market_segment_Complementary" required="required">
+                            <option value="market_segment_Complementary"> Complementary</option>
+                            <option value="market_segment_Corporate"> Corporate</option>
+                            <option value="market_segment_Direct">Direct</option>
+                            <option value="market_segment_Groups"> Groups</option>
+                            <option value="market_segment_Offline">Offline TA/TO</option>
+                            <option value="market_segment_Online">Online TA</option>
+                            <option value="market_segment_Undefined">Undefined </option>
+                            <option value="market_segment_Aviation"> Aviation</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+                        <h4>Destribution Channel?</h4><select class="form-control" name="distribution_channel_Direct" id="distribution_channel_Direct" required="required">
+                            <option value="distribution_channel_Direct"> Direct</option>
+                            <option value="distribution_channel_GDS"> GDS</option>
+                            <option value="distribution_channel_TA"> TA/TO</option>
+                            <option value="distribution_channel_Undefined">UnIdentified</option>
+                            <option value="distribution_channel_Corporate">Corporate</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+                        <h4>Reserved Room Type?</h4><select class="form-control" name="reserved_room_type_B" id="reserved_room_type_B" required="required">
+                            <option value="reserved_room_type_A"> Room Type A</option>
+                            <option value="reserved_room_type_B"> Room Type B</option>
+                            <option value="reserved_room_type_C"> Room Type C</option>
+                            <option value="reserved_room_type_D"> Room Type D</option>
+                            <option value="reserved_room_type_E"> Room Type E</option>
+                            <option value="reserved_room_type_F"> Room Type F</option>
+                            <option value="reserved_room_type_G"> Room Type G</option>
+                            <option value="reserved_room_type_H"> Room Type H</option>
+                            <option value="reserved_room_type_P"> Room Type P</option>
+                            <option value="reserved_room_type_L"> Room Type L</option>
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+                        <h4>Assigned Room Type?</h4><select class="form-control" name="assigned_room_type_B" id="assigned_room_type_B" required="required">
+                            <option value="assigned_room_type_A"> Room Type A</option>
+                            <option value="assigned_room_type_B"> Room Type B</option>
+                            <option value="assigned_room_type_C"> Room Type C</option>
+                            <option value="assigned_room_type_D"> Room Type D</option>
+                            <option value="assigned_room_type_E"> Room Type E</option>
+                            <option value="assigned_room_type_F"> Room Type F</option>
+                            <option value="assigned_room_type_G"> Room Type G</option>
+                            <option value="assigned_room_type_H"> Room Type H</option>
+                            <option value="assigned_room_type_P"> Room Type P</option>
+                            <option value="assigned_room_type_L"> Room Type L</option>
+                            <option value="assigned_room_type_I"> Room Type I</option>
+                            <option value="assigned_room_type_K"> Room Type L</option>
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+                        <h4>Deposit Type?</h4><select class="form-control" name="deposit_type_Non" id="deposit_type_Non" required="required">
+                            <option value="deposit_type_Non"> Non Refundable</option>
+                            <option value="deposit_type_Refundable"> Refundable</option>
+                            <option value="deposit_type_No_deposit"> No Deposit</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+                        <h4>Customer Type?</h4><select class="form-control" name="customer_type_Group" id="customer_type_Group" required="required">
+                            <option value="customer_type_Group"> Direct</option>
+                            <option value="customer_type_Transient"> Trancient</option>
+                            <option value="customer_type_Transient_party"> Transient Party</option>
+                            <option value="customer_type_Contract">Contract</option>
+                            
+                        </select>
+
+                    </div>
+
+                    <button class="btn btn-success" id="sub" type="submit ">Predict Booking</button>
+
+                </form>  
+                
+                <br><br><h3>{{ prediction_text }}</h3>
+            </div>
+        </div>    
+        
+    </header>
+    <footer class="page-footer font-small ">
+
+        <!-- Copyright -->
+        <div class=" btn-dark footer-copyright text-center py-3"><p><h5>© 2020 Copyright:<p>
+         <p> Created By Abhijeet Singh and Samar Kumar Panda<p></h5> 
+        </div>
+        <!-- Copyright -->
+      
+      </footer> 
+
+        <script type="text/javascript">
+            function slideshow(){
+                var x= document.getElementById('check-class');
+                if(x.style.display===none){
+                    x.style.display="block";
+                }
+                else{
+                    x.style.display="none";
+                }
+            }
+        </script>
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+header{
+    /* background-image: linear-gradient(rgba(0, 0, 0, 0.6),rgba(0,0,0,0.6)),url('img_b2.jpg');  */
+    background-color: rgb(248, 244, 18);
+    
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 500vh;
+ }
+ .btn{
+    display: inline-block;
+    padding: 10px  30px;
+    font-weight: lighter;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 200px; 
+    transition: background-color 0.2s, border 0.2s, color 0.2s;
+}
+
+ body{
+    color: #0000a0;
+    font-size: 200%;   /*  that was defined in the body tag (20px * 240)/100 */
+    font-family: 'Kaushan Script', cursive;
+    font-weight: lighter;
+    word-spacing: 5px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+input, select, option{
+    opacity: 0.7;
+}
+
+</style>
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</html>
